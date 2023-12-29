@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Website</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: url('https://www.hindustantimes.com/ht-img/img/2023/11/23/550x309/IMG_7289_1700764001828_1700764009852.jpeg') center/cover no-repeat; /* Replace 'placeholder-image.jpg' with your initial background image */
+            font-family: 'Arial', sans-serif;
+            color: #ffffff;
+            transition: background 1s; /* Add transition for a smooth background change */
+        }
+
+        #title {
+            font-size: 36px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(81, 11, 11, 0.5);
+        }
+
+        #button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #yes-button, #no-button {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #ff69b4;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        #made-by {
+            margin-top: 30px;
+            font-size: 14px;
+        }
+
+        #heart-container {
+            display: none;
+            position: absolute;
+            animation: floatHeart 2s ease-out infinite;
+        }
+
+        .heart {
+            width: 20px;
+            height: 20px;
+            background-color: #ff69b4;
+            position: absolute;
+            border-radius: 50%;
+            transform: rotate(-45deg);
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            to {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="title">Pray for Nanami</div>
+    <div id="button-container">
+        <button id="no-button" onclick="moveNoButton()">No</button>
+        <button id="yes-button" onclick="showThanks()">Yes</button>
+    </div>
+
+    <div id="heart-container"></div>
+
+    <script>
+        function moveNoButton() {
+            var noButton = document.getElementById("no-button");
+            noButton.style.marginLeft = Math.random() * 300 + "px";
+        }
+
+        function showThanks() {
+            var title = document.getElementById("title");
+            title.innerHTML = "Thank you bbg ❤️";
+
+            var buttonContainer = document.getElementById("button-container");
+            buttonContainer.style.display = "none";
+
+            var heartContainer = document.getElementById("heart-container");
+            heartContainer.innerHTML = ""; // Clear previous hearts
+            heartContainer.style.display = "block";
+
+            // Create a floating heart
+            var heart = document.createElement("div");
+            heart.className = "heart";
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.top = Math.random() * window.innerHeight + "px";
+
+            heart.onclick = function () {
+                emitSmallHearts();
+            };
+
+            heartContainer.appendChild(heart);
+
+            // Change background color to pink
+            document.body.style.background = "#ff69b4";
+        }
+
+        function emitSmallHearts() {
+            var heartContainer = document.getElementById("heart-container");
+
+            for (var i = 0; i < 10; i++) {
+                var smallHeart = document.createElement("div");
+                smallHeart.className = "heart";
+                smallHeart.style.width = "10px";
+                smallHeart.style.height = "10px";
+                smallHeart.style.left = Math.random() * window.innerWidth + "px";
+                smallHeart.style.top = Math.random() * window.innerHeight + "px";
+                smallHeart.style.animation = "pulse 1s infinite alternate";
+                heartContainer.appendChild(smallHeart);
+            }
+        }
+    </script>
+
+    <div id="made-by">Made by Abhinav</div>
+</body>
+</html>
